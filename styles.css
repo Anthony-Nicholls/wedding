@@ -1,0 +1,352 @@
+/* ── Customise colours & fonts here ── */
+:root {
+  --color-bg: #faf8f5;
+  --color-bg-alt: #f0ebe3;
+  --color-text: #2c2825;
+  --color-muted: #6b6560;
+  --color-accent: #8b7355;
+  --color-accent-dark: #6d5a44;
+  --color-white: #ffffff;
+
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+
+  --max-width: 72rem;
+  --narrow-width: 40rem;
+  --section-pad: clamp(3rem, 8vw, 6rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+h1 {
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+code {
+  font-size: 0.9em;
+  background: var(--color-bg-alt);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+/* ── Layout ── */
+.container {
+  width: min(100% - 2rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.narrow {
+  width: min(100% - 2rem, var(--narrow-width));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+.section-alt {
+  background: var(--color-bg-alt);
+}
+
+/* ── Navigation ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding: 1rem;
+  background: rgba(250, 248, 245, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav a {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-muted);
+  padding: 0.25rem 0;
+  transition: color 0.2s;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  color: var(--color-accent);
+}
+
+/* ── Hero ── */
+.hero {
+  min-height: 100svh;
+  min-height: 100vh; /* fallback */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 4rem;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(250, 248, 245, 0.3),
+      rgba(250, 248, 245, 0.85)
+    ),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop") center / cover no-repeat;
+}
+
+.hero-content {
+  max-width: 36rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.hero .amp {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-accent);
+}
+
+.hero-date {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.hero-location {
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-block;
+  padding: 0.875rem 2.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-white);
+  background: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.btn-dark {
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.btn-dark:hover,
+.btn-dark:focus-visible {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.text-link {
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Cards ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
+}
+
+.cards-two {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.card {
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.section-alt .card {
+  background: var(--color-bg);
+}
+
+.card-time {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Timeline ── */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid var(--color-bg-alt);
+}
+
+.timeline li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  padding: 0 0 1.5rem 1.5rem;
+  position: relative;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.5rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.timeline-time {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.timeline-event {
+  font-weight: 400;
+}
+
+/* ── RSVP ── */
+.rsvp {
+  text-align: center;
+}
+
+.rsvp-deadline {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.back-to-top {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-muted);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  color: var(--color-accent);
+}
+
+/* ── Small screens ── */
+@media (max-width: 30rem) {
+  .timeline li {
+    padding-left: 1.25rem;
+  }
+
+  .nav {
+    gap: 0.25rem 1rem;
+  }
+
+  .nav a {
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  .nav a {
+    transition: none;
+  }
+}
