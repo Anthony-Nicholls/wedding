@@ -12,16 +12,21 @@
 </head>
 <body>
   <header class="hero" id="top">
-    <nav class="nav" aria-label="Main">
-      <a href="#story">Story</a>
-      <a href="#venue">Venue</a>
-      <a href="#travel">Travel</a>
-      <a href="#accommodation">Accommodation</a>
-      <a href="#catering">Catering</a>
-      <a href="#entertainment">Entertainment</a>
-      <a href="#schedule">Schedule</a>
-      <a href="#gifts">Gifts</a>
-      <a href="#rsvp">RSVP</a>
+    <nav class="nav nav--compact" aria-label="Main">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div class="nav-links" id="nav-menu">
+        <a href="#story">Story</a>
+        <a href="#venue">Venue</a>
+        <a href="#travel">Travel</a>
+        <a href="#accommodation">Accommodation</a>
+        <a href="#catering">Catering</a>
+        <a href="#entertainment">Entertainment</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#gifts">Gifts</a>
+        <a href="#rsvp">RSVP</a>
+      </div>
     </nav>
 
     <div class="hero-content">
@@ -60,8 +65,8 @@
           <a href="https://www.cogges.org.uk/" target="_blank" rel="noopener noreferrer">Cogges Manor Farm</a>
           is a historic manor house and farm set within seventeen acres of beautiful open space, including an adventure playground, orchard picnic areas, and a stunning walled garden.
           <br><br>
-          When Jacob was younger, Cheryl would visit Cogges farm at least once a week, as he loved a particularly greedy goat called Jonathon.
-          This meant that we had lots of happy memories of visiting Cogges, so when we discovered it was also a licensed wedding venue, we knew it would be the perfect place to celebrate our special day.
+          When Jacob was younger, Cheryl would visit Cogges farm at least once a week, as Jacob loved a particularly greedy goat called Jonathon.
+          This means we have lots of happy memories visiting Cogges, so when we discovered it was also a licensed wedding venue, we knew it would be the perfect place to celebrate our special day.
           <br><br>
           Even if you’ve never visited Cogges Manor Farm before, you may still recognise it from the ITV drama
           <i>Downton Abbey</i>, where it features as the fictional Yew Tree Farm.
@@ -102,7 +107,7 @@
             </p>
           </article>
           <article class="card">
-            <h3>By train</h3>
+            <h3>By public transport</h3>
             <p>
               Hanborough station is a 13 minute taxi ride, or a 30 minute bus ride (catch the S7 to Witney, Market Square).
               <br><br>
@@ -112,7 +117,7 @@
           <article class="card">
             <h3>Questions</h3>
             <p>
-              Any issues with travel please email us at
+              Any issues or questions regarding travel please email us at
               <a class="text-link" href="mailto:hello@nichollswedding.co.uk">hello@nichollswedding.co.uk</a>
               and we'll do our best to help.
             </p>
@@ -172,7 +177,7 @@
         <p>
           We have arranged for a professional artist,
           <a href="https://www.instagram.com/theladyintown/" target="_blank" rel="noopener noreferrer">Astha Sethi</a>,
-          to be available to create live drawings of guests from 12-3:30pm.
+          to be available to create live drawings of guests from 12:00 - 3:30 pm.
           She is a fashion designer and illustrator and can draw from photographs, which she will begin taking when guests arrive.
           <br><br>
           During the day there will be time to explore Cogges farm and gardens, where there are orchards, the farm house, playgrounds, and animal feeding.
@@ -306,5 +311,54 @@
     <p>Anthony & Cheryl · 24th April 2027</p>
     <a href="#top" class="back-to-top">Back to top</a>
   </footer>
+
+  <script>
+    (function () {
+      const nav = document.querySelector(".nav");
+      const menu = document.querySelector(".nav-links");
+      const toggle = document.querySelector(".nav-toggle");
+      const links = document.querySelectorAll(".nav-links a");
+
+      function setOpen(open) {
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", open);
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+
+      function updateNavMode() {
+        nav.classList.remove("nav--expanded", "nav--compact");
+        nav.classList.add("is-measuring");
+
+        const needsCompact = menu.scrollWidth > menu.clientWidth;
+
+        nav.classList.remove("is-measuring");
+        nav.classList.add(needsCompact ? "nav--compact" : "nav--expanded");
+
+        if (!needsCompact) {
+          setOpen(false);
+        }
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(!nav.classList.contains("is-open"));
+      });
+
+      links.forEach(function (link) {
+        link.addEventListener("click", function () {
+          setOpen(false);
+        });
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          setOpen(false);
+        }
+      });
+
+      updateNavMode();
+      new ResizeObserver(updateNavMode).observe(nav);
+      window.addEventListener("load", updateNavMode);
+    })();
+  </script>
 </body>
 </html>

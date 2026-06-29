@@ -144,9 +144,9 @@ main .section + .section::before {
   right: 0;
   z-index: 100;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.5rem;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
   padding: 1rem;
   background: rgba(253, 249, 248, 0.92);
   backdrop-filter: blur(8px);
@@ -154,7 +154,136 @@ main .section + .section::before {
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.nav a {
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+.nav--compact .nav-toggle {
+  display: flex;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-accent-secondary);
+  outline-offset: 2px;
+}
+
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  display: block;
+  width: 1.375rem;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.nav-toggle-icon {
+  position: relative;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-icon::before {
+  top: -6px;
+}
+
+.nav-toggle-icon::after {
+  top: 6px;
+}
+
+.nav.is-open .nav-toggle-icon {
+  background: transparent;
+}
+
+.nav.is-open .nav-toggle-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav.is-open .nav-toggle-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem 1.5rem;
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
+}
+
+.nav--compact .nav-links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem 1rem;
+  background: rgba(253, 249, 248, 0.98);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nav--compact.is-open .nav-links {
+  display: flex;
+}
+
+.nav.is-measuring {
+  justify-content: flex-end;
+}
+
+.nav.is-measuring .nav-toggle {
+  visibility: hidden;
+}
+
+.nav.is-measuring .nav-links {
+  display: flex !important;
+  position: static;
+  flex: 1;
+  min-width: 0;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  visibility: hidden;
+  pointer-events: none;
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nav--expanded {
+  justify-content: center;
+  gap: 0.25rem 1.5rem;
+}
+
+.nav-links a {
   font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -165,8 +294,8 @@ main .section + .section::before {
   transition: color 0.2s;
 }
 
-.nav a:hover,
-.nav a:focus-visible {
+.nav-links a:hover,
+.nav-links a:focus-visible {
   color: var(--color-accent-secondary);
 }
 
@@ -376,14 +505,6 @@ main .section + .section::before {
   .timeline li {
     padding-left: 1.25rem;
   }
-
-  .nav {
-    gap: 0.25rem 1rem;
-  }
-
-  .nav a {
-    font-size: 0.75rem;
-  }
 }
 
 /* ── Reduced motion ── */
@@ -393,7 +514,10 @@ main .section + .section::before {
   }
 
   .btn,
-  .nav a {
+  .nav-links a,
+  .nav-toggle-icon,
+  .nav-toggle-icon::before,
+  .nav-toggle-icon::after {
     transition: none;
   }
 }
