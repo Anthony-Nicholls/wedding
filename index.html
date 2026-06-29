@@ -329,7 +329,24 @@
         nav.classList.remove("nav--expanded", "nav--compact");
         nav.classList.add("is-measuring");
 
-        const needsCompact = menu.scrollWidth > menu.clientWidth;
+        const navStyle = getComputedStyle(nav);
+        const menuStyle = getComputedStyle(menu);
+        const paddingX =
+          parseFloat(navStyle.paddingLeft) + parseFloat(navStyle.paddingRight);
+        const gap = parseFloat(menuStyle.columnGap) || 0;
+        const toggleWidth = toggle.getBoundingClientRect().width;
+        const items = menu.querySelectorAll("a");
+
+        let linksWidth = 0;
+        items.forEach(function (item, index) {
+          linksWidth += item.getBoundingClientRect().width;
+          if (index > 0) {
+            linksWidth += gap;
+          }
+        });
+
+        const available = nav.clientWidth - paddingX - toggleWidth - gap;
+        const needsCompact = linksWidth > available;
 
         nav.classList.remove("is-measuring");
         nav.classList.add(needsCompact ? "nav--compact" : "nav--expanded");
@@ -358,6 +375,16 @@
       updateNavMode();
       new ResizeObserver(updateNavMode).observe(nav);
       window.addEventListener("load", updateNavMode);
+      window.addEventListener("orientationchange", updateNavMode);
+      window.addEventListener("pageshow", updateNavMode);
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", updateNavMode);
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(updateNavMode);
+      }
     })();
   </script>
 </body>

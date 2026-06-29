@@ -158,8 +158,8 @@ main .section + .section::before {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   border: none;
   border-radius: 2px;
@@ -167,6 +167,7 @@ main .section + .section::before {
   cursor: pointer;
   color: var(--color-text);
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav--compact .nav-toggle {
@@ -259,14 +260,17 @@ main .section + .section::before {
 }
 
 .nav.is-measuring .nav-toggle {
+  display: flex;
   visibility: hidden;
 }
 
 .nav.is-measuring .nav-links {
   display: flex !important;
   position: static;
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  min-width: auto;
   flex-direction: row;
   flex-wrap: nowrap;
   visibility: hidden;
@@ -276,6 +280,11 @@ main .section + .section::before {
   border-bottom: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+}
+
+.nav.is-measuring .nav-links a {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .nav--expanded {
