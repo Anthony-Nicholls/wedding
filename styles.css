@@ -76,6 +76,21 @@ p {
   margin: 0 0 1rem;
 }
 
+.embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  margin-block: 1.5rem;
+}
+
+.embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 code {
   font-size: 0.9em;
   background: var(--color-bg-alt);
@@ -115,6 +130,73 @@ code {
 
 #schedule h2 {
   text-align: center;
+}
+
+#faq {
+  text-align: left;
+}
+
+#faq h2 {
+  text-align: center;
+}
+
+.faq-list {
+  margin-top: 1rem;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(196, 154, 154, 0.25);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid rgba(196, 154, 154, 0.25);
+}
+
+.faq-item summary {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: var(--color-accent-secondary);
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 2rem 1rem 0;
+  position: relative;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::marker {
+  content: "";
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-accent-secondary);
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item summary:hover,
+.faq-item summary:focus-visible {
+  color: #5a6e51;
+}
+
+.faq-answer {
+  padding: 0 0 1.25rem;
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
 }
 
 main .section + .section::before {
@@ -354,7 +436,62 @@ main .section + .section::before {
 
 .hero-location {
   color: var(--color-muted);
+  margin-bottom: 1.5rem;
+}
+
+.countdown {
   margin-bottom: 2rem;
+}
+
+.countdown-message {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3.6vw, 1.75rem);
+  color: var(--color-accent);
+  margin: 0 0 1rem;
+}
+
+.countdown.is-complete .countdown-grid {
+  display: none;
+}
+
+.countdown.is-complete .countdown-message {
+  display: block;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.countdown-value {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1;
+  color: var(--color-accent-secondary);
+}
+
+.countdown-label {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@media (max-width: 22rem) {
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 12rem;
+  }
 }
 
 /* ── Buttons ── */
@@ -526,7 +663,8 @@ main .section + .section::before {
   .nav-links a,
   .nav-toggle-icon,
   .nav-toggle-icon::before,
-  .nav-toggle-icon::after {
+  .nav-toggle-icon::after,
+  .faq-item summary::after {
     transition: none;
   }
 }
