@@ -1,19 +1,20 @@
 /* ── Customise colours & fonts here ── */
 :root {
-  --color-bg: #faf8f5;
-  --color-bg-alt: #f0ebe3;
-  --color-text: #2c2825;
-  --color-muted: #6b6560;
-  --color-accent: #8b7355;
-  --color-accent-dark: #6d5a44;
+  --color-bg: #fdf9f8;
+  --color-bg-alt: #f5ebe9;
+  --color-text: #3d3636;
+  --color-muted: #8a7e7e;
+  --color-accent: #c49a9a;
+  --color-accent-dark: #a67f7f;
+  --color-accent-secondary: #6d8562;
   --color-white: #ffffff;
 
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
   --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
 
   --max-width: 72rem;
   --narrow-width: 40rem;
-  --section-pad: clamp(3rem, 8vw, 6rem);
+  --section-pad: clamp(3rem, 9.6vw, 6rem);
 }
 
 *,
@@ -23,6 +24,7 @@
 }
 
 html {
+  font-size: 120%;
   scroll-behavior: smooth;
 }
 
@@ -55,18 +57,19 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: clamp(2.75rem, 8vw, 5rem);
+  font-size: clamp(2.75rem, 9.6vw, 5rem);
   letter-spacing: 0.02em;
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(2rem, 6vw, 2.75rem);
   text-align: center;
   margin-bottom: 2rem;
 }
 
 h3 {
   font-size: 1.5rem;
+  color: var(--color-accent);
 }
 
 p {
@@ -93,10 +96,30 @@ code {
 
 .section {
   padding-block: var(--section-pad);
+  position: relative;
 }
 
 .section-alt {
   background: var(--color-bg-alt);
+}
+
+main .section + .section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(12rem, 70%);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent) 25%,
+    var(--color-accent-secondary) 50%,
+    var(--color-accent) 75%,
+    transparent
+  );
+  opacity: 0.45;
 }
 
 /* ── Navigation ── */
@@ -111,7 +134,7 @@ code {
   flex-wrap: wrap;
   gap: 0.25rem 1.5rem;
   padding: 1rem;
-  background: rgba(250, 248, 245, 0.92);
+  background: rgba(253, 249, 248, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -130,7 +153,7 @@ code {
 
 .nav a:hover,
 .nav a:focus-visible {
-  color: var(--color-accent);
+  color: var(--color-accent-secondary);
 }
 
 /* ── Hero ── */
@@ -145,8 +168,8 @@ code {
   background:
     linear-gradient(
       to bottom,
-      rgba(250, 248, 245, 0.3),
-      rgba(250, 248, 245, 0.85)
+      rgba(253, 249, 248, 0.3),
+      rgba(253, 249, 248, 0.85)
     ),
     url("https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop") center / cover no-repeat;
 }
@@ -167,12 +190,12 @@ code {
 .hero .amp {
   font-style: italic;
   font-weight: 400;
-  color: var(--color-accent);
+  color: var(--color-text);
 }
 
 .hero-date {
   font-family: var(--font-serif);
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: clamp(1.25rem, 3.6vw, 1.75rem);
   margin-top: 1.5rem;
   margin-bottom: 0.25rem;
 }
@@ -233,6 +256,16 @@ code {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
 }
 
+.cards-three {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 64rem) {
+  .cards-three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .card {
   background: var(--color-white);
   padding: 2rem;
@@ -247,7 +280,7 @@ code {
 .card-time {
   font-family: var(--font-serif);
   font-size: 1.25rem;
-  color: var(--color-accent);
+  color: var(--color-accent-secondary);
   margin-bottom: 0.75rem;
 }
 
@@ -256,7 +289,7 @@ code {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-left: 2px solid var(--color-bg-alt);
+  border-left: 2px solid var(--color-accent-secondary);
 }
 
 .timeline li {
@@ -275,13 +308,13 @@ code {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-accent-secondary);
 }
 
 .timeline-time {
   font-family: var(--font-serif);
   font-size: 1.125rem;
-  color: var(--color-accent);
+  color: var(--color-accent-secondary);
   white-space: nowrap;
 }
 
