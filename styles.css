@@ -97,10 +97,24 @@ code {
 .section {
   padding-block: var(--section-pad);
   position: relative;
+  text-align: center;
+}
+
+.section ol {
+  list-style-position: inside;
+  padding-left: 0;
 }
 
 .section-alt {
   background: var(--color-bg-alt);
+}
+
+#schedule {
+  text-align: left;
+}
+
+#schedule h2 {
+  text-align: center;
 }
 
 main .section + .section::before {
@@ -168,10 +182,10 @@ main .section + .section::before {
   background:
     linear-gradient(
       to bottom,
-      rgba(253, 249, 248, 0.3),
-      rgba(253, 249, 248, 0.85)
+      rgba(253, 249, 248, 0.45),
+      rgba(253, 249, 248, 1.0)
     ),
-    url("https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80&auto=format&fit=crop") center / cover no-repeat;
+    url("images/nicholls.jpeg") center / cover no-repeat;
 }
 
 .hero-content {
