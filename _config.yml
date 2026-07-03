@@ -1,7 +1,7 @@
 title: Anthony & Cheryl
 description: Wedding celebration — save the date and find all the details here.
-url: https://anthony-nicholls.github.io
-baseurl: /wedding
+url: https://nichollswedding.co.uk
+baseurl: ""
 
 wedding_date: Saturday, 24 April 2027
 venue_name: Cogges Manor Farm, Witney
@@ -11,6 +11,5 @@ email: hello@nichollswedding.co.uk
 
 exclude:
   - Gemfile
-  - Gemfile.lock
   - README.md
   - vendor
