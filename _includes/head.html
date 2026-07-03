@@ -1,0 +1,20 @@
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ site.description }}">
+  {% if page.url == '/day/' %}
+    {% assign document_title = site.title | append: ' — Day' %}
+  {% elsif page.url == '/evening/' %}
+    {% assign document_title = site.title | append: ' — Evening' %}
+  {% else %}
+    {% assign document_title = site.title %}
+  {% endif %}
+  <title>{{ document_title }}</title>
+  <link rel="icon" href="{{ '/images/nicholls.jpeg' | relative_url }}" type="image/jpeg">
+  <meta property="og:title" content="{{ document_title }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/images/nicholls.jpeg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">

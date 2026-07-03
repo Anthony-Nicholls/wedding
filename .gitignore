@@ -8,7 +8,6 @@
 # Custom folder icons
 Icon
 
-
 # Volume root files
 .DocumentRevisions-V100
 .fseventsd
@@ -17,3 +16,11 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/bundle/
+Gemfile.lock

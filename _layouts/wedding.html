@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <header class="hero" id="top">
+    <nav class="nav nav--compact" aria-label="Main">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+      </button>
+      <div class="nav-links" id="nav-menu">
+        {% for item in page.nav %}
+          {% assign nav_item = site.data.nav | where: "id", item | first %}
+          <a href="#{{ nav_item.id }}">{{ nav_item.label }}</a>
+        {% endfor %}
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">{{ page.hero_eyebrow }}</p>
+      <h1>Anthony <span class="amp">&amp;</span> Cheryl</h1>
+      <p class="hero-date">{{ site.wedding_date }}</p>
+      <p class="hero-location">{{ site.venue_name }}</p>
+      {% include countdown.html %}
+      <a class="btn btn-dark" href="#rsvp">RSVP</a>
+    </div>
+  </header>
+
+  <main>
+    {% for section in page.sections %}
+      {% include sections/{{ section }}.html %}
+    {% endfor %}
+  </main>
+
+  <footer class="footer">
+    <a href="{{ '/' | relative_url }}" class="footer-link">Wrong invitation?</a>
+    <a href="#top" class="back-to-top">Back to top</a>
+  </footer>
+
+  {% include scripts.html %}
+</body>
+</html>

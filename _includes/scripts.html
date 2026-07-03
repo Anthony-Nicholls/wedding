@@ -1,0 +1,124 @@
+<script>
+  (function () {
+    const nav = document.querySelector(".nav");
+    const menu = document.querySelector(".nav-links");
+    const toggle = document.querySelector(".nav-toggle");
+    if (!nav || !menu || !toggle) {
+      return;
+    }
+
+    const links = document.querySelectorAll(".nav-links a");
+
+    function setOpen(open) {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open);
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+
+    function updateNavMode() {
+      nav.classList.remove("nav--expanded", "nav--compact");
+      nav.classList.add("is-measuring");
+
+      const navStyle = getComputedStyle(nav);
+      const menuStyle = getComputedStyle(menu);
+      const paddingX =
+        parseFloat(navStyle.paddingLeft) + parseFloat(navStyle.paddingRight);
+      const gap = parseFloat(menuStyle.columnGap) || 0;
+      const toggleWidth = toggle.getBoundingClientRect().width;
+      const items = menu.querySelectorAll("a");
+
+      let linksWidth = 0;
+      items.forEach(function (item, index) {
+        linksWidth += item.getBoundingClientRect().width;
+        if (index > 0) {
+          linksWidth += gap;
+        }
+      });
+
+      const available = nav.clientWidth - paddingX - toggleWidth - gap;
+      const needsCompact = linksWidth > available;
+
+      nav.classList.remove("is-measuring");
+      nav.classList.add(needsCompact ? "nav--compact" : "nav--expanded");
+
+      if (!needsCompact) {
+        setOpen(false);
+      }
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!nav.classList.contains("is-open"));
+    });
+
+    links.forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    });
+
+    updateNavMode();
+    new ResizeObserver(updateNavMode).observe(nav);
+    window.addEventListener("load", updateNavMode);
+    window.addEventListener("orientationchange", updateNavMode);
+    window.addEventListener("pageshow", updateNavMode);
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", updateNavMode);
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateNavMode);
+    }
+  })();
+
+  (function () {
+    const countdown = document.querySelector(".countdown");
+    if (!countdown) {
+      return;
+    }
+
+    const weddingDate = new Date(countdown.dataset.weddingDate);
+    const message = countdown.querySelector(".countdown-message");
+    const values = {
+      days: countdown.querySelector('[data-unit="days"]'),
+      hours: countdown.querySelector('[data-unit="hours"]'),
+      minutes: countdown.querySelector('[data-unit="minutes"]'),
+      seconds: countdown.querySelector('[data-unit="seconds"]'),
+    };
+
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = weddingDate.getTime() - now;
+
+      if (diff <= 0) {
+        countdown.classList.add("is-complete");
+        message.hidden = false;
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      values.days.textContent = days;
+      values.hours.textContent = pad(hours);
+      values.minutes.textContent = pad(minutes);
+      values.seconds.textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>

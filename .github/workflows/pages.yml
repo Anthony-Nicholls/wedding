@@ -24,10 +24,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v5
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

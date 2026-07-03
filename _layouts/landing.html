@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head.html %}
+</head>
+<body class="landing">
+  <header class="hero" id="top">
+    <div class="hero-content">
+      <p class="hero-eyebrow">We're getting married</p>
+      <h1>Anthony <span class="amp">&amp;</span> Cheryl</h1>
+      <p class="hero-date">{{ site.wedding_date }}</p>
+      <p class="hero-location">{{ site.venue_name }}</p>
+      {% include countdown.html %}
+      <p class="landing-prompt">Which invitation do you have?</p>
+      <div class="landing-choices">
+        <a class="landing-choice" href="{{ '/day/' | relative_url }}">
+          <span class="landing-choice-title">Day celebration</span>
+          <span class="landing-choice-detail">Ceremony, wedding breakfast &amp; evening</span>
+        </a>
+        <a class="landing-choice" href="{{ '/evening/' | relative_url }}">
+          <span class="landing-choice-title">Evening celebration</span>
+          <span class="landing-choice-detail">Join us from 6:00 pm</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  {% include scripts.html %}
+</body>
+</html>
