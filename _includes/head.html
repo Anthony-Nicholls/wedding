@@ -9,7 +9,9 @@
     {% assign document_title = site.title %}
   {% endif %}
   <title>{{ document_title }}</title>
-  <link rel="icon" href="{{ '/images/nicholls.jpeg' | relative_url }}" type="image/jpeg">
+  <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}" sizes="32x32" type="image/png">
+  <link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/images/apple-touch-icon.png' | relative_url }}">
   <meta property="og:title" content="{{ document_title }}">
   <meta property="og:description" content="{{ site.description }}">
   <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/images/nicholls.jpeg">
