@@ -500,6 +500,14 @@ main .section + .section::before {
   }
 }
 
+.hero-rsvp {
+  margin-top: 0.5rem;
+}
+
+.hero .rsvp-deadline {
+  margin-bottom: 1rem;
+}
+
 /* ── Buttons ── */
 .btn {
   display: inline-block;
