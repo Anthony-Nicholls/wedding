@@ -24,8 +24,7 @@
       <p class="hero-location">{{ site.venue_name }}</p>
       {% include countdown.html %}
       <div class="hero-rsvp">
-        <p class="rsvp-deadline">Please respond by <strong>{{ site.rsvp_deadline }}</strong></p>
-        <a class="btn btn-dark" href="{{ site.rsvp_url }}">RSVP</a>
+        {% include rsvp-cta.html %}
       </div>
     </div>
   </header>
