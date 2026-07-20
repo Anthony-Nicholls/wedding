@@ -1,3 +1,5 @@
+- id: top
+  label: Home
 - id: story
   label: Story
 - id: venue
