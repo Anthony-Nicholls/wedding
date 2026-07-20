@@ -8,10 +8,11 @@
   {% else %}
     {% assign document_title = site.title %}
   {% endif %}
+  {% assign cache_bust = site.time | date: "%s" %}
   <title>{{ document_title }}</title>
-  <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}" sizes="32x32" type="image/png">
-  <link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="{{ '/images/apple-touch-icon.png' | relative_url }}">
+  <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}?v={{ cache_bust }}" sizes="32x32" type="image/png">
+  <link rel="icon" href="{{ '/images/favicon.svg' | relative_url }}?v={{ cache_bust }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/images/apple-touch-icon.png' | relative_url }}?v={{ cache_bust }}">
   <meta property="og:title" content="{{ document_title }}">
   <meta property="og:description" content="{{ site.description }}">
   <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/images/nicholls.jpeg">
@@ -19,4 +20,4 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=Outfit:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}?v={{ cache_bust }}">
