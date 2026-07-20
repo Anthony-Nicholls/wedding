@@ -1,22 +1,40 @@
 <section class="section" id="accommodation">
-  <div class="container narrow">
+  <div class="container">
     <h2>Accommodation</h2>
-    <ul class="text-left">
-      <li>
-        <a href="https://peachpubs.com/rooms/the-fleece/" target="_blank" rel="noopener noreferrer">The Fleece</a> (12 minute <b>walk</b> from the venue)
-      </li>
-      <li>
-        <a href="https://www.acornpubs.co.uk/blueboar/bedrooms/" target="_blank" rel="noopener noreferrer">The Blue Boar</a> (13 minute <b>walk</b> from the venue)
-      </li>
-      <li>
-        <a href="https://minstermill.co.uk" target="_blank" rel="noopener noreferrer">Old Swan & Minster Mill</a> (13 minute <b>drive</b> from the venue)
-      </li>
-      <li>
-        <a href="https://www.premierinn.com/gb/en/hotels/england/oxfordshire/witney/witney.html" target="_blank" rel="noopener noreferrer">Premier Inn</a> (10 minute <b>drive</b> from the venue)
-      </li>
-      <li>
-        <a href="https://www.travelodge.co.uk/hotels/681/Witney-hotel" target="_blank" rel="noopener noreferrer">Travelodge</a> (9 minute <b>drive</b> from the venue)
-      </li>
-    </ul>
+    <p class="narrow accommodation-intro">
+      Cogges is a heritage site, and as such does not have any accommodation on site.
+      However, Cogges is only a short 10 minute walk from Witney town centre.
+      <br><br>
+      Below are a few hotels and B&amp;Bs in the nearby area.
+    </p>
+    <div class="stays">
+      {% for stay in site.data.accommodation %}
+      <article class="stay">
+        <a class="stay-media" href="{{ stay.url }}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+          <img
+            src="{{ stay.image | prepend: '/images/accommodation/' | relative_url }}"
+            alt=""
+            loading="lazy"
+            width="900"
+            height="675"
+          >
+        </a>
+        <div class="stay-body">
+          <h3 class="stay-title">
+            <a href="{{ stay.url }}" target="_blank" rel="noopener noreferrer">{{ stay.name }}</a>
+          </h3>
+          <p class="stay-meta">
+            <span class="stay-distance">{{ stay.distance }} {{ stay.mode }}</span>
+            {% if stay.price %}
+            <span class="stay-meta-sep" aria-hidden="true">·</span>
+            <span class="stay-price" aria-label="Relative price {{ stay.price }}">{{ stay.price }}</span>
+            {% endif %}
+          </p>
+          <p class="stay-description">{{ stay.description }}</p>
+          <a class="stay-link text-link" href="{{ stay.url }}" target="_blank" rel="noopener noreferrer">View details</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
   </div>
 </section>

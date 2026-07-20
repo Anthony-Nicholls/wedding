@@ -1,0 +1,47 @@
+- name: The Fleece
+  distance: 12 minute
+  mode: walk
+  price: ££
+  description: Characterful en suite rooms above a popular gastropub overlooking Church Green.
+  url: https://peachpubs.com/rooms/the-fleece/
+  image: fleece.jpg
+
+- name: The Blue Boar
+  distance: 13 minute
+  mode: walk
+  price: ££
+  description: Boutique rooms in a 17th-century coaching inn on Witney’s market square.
+  url: https://www.acornpubs.co.uk/blueboar/bedrooms/
+  image: blue-boar.jpg
+
+- name: The Witney Hotel
+  distance: 9 minute
+  mode: drive
+  price: £
+  description: Cosy rooms on Church Green, with a breakfast basket and tea tray included.
+  url: http://thewitneyhotel.co.uk/
+  image: witney-hotel.jpg
+
+- name: Old Swan & Minster Mill
+  distance: 13 minute
+  mode: drive
+  price: £££
+  description: A riverside Cotswold retreat with spa, gardens and restaurants in Minster Lovell.
+  url: https://minstermill.co.uk
+  image: minster-mill.jpg
+
+- name: Premier Inn
+  distance: 10 minute
+  mode: drive
+  price: ££
+  description: Comfortable modern rooms a short drive from the venue.
+  url: https://www.premierinn.com/gb/en/hotels/england/oxfordshire/witney/witney.html
+  image: premier-inn.jpg
+
+- name: Travelodge
+  distance: 9 minute
+  mode: drive
+  price: £
+  description: Simple, affordable rooms a short drive from Cogges.
+  url: https://www.travelodge.co.uk/hotels/681/Witney-hotel
+  image: travelodge.jpg
