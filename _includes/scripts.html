@@ -8,6 +8,7 @@
     }
 
     const links = document.querySelectorAll(".nav-links a");
+    let syncIndicator = null;
 
     function setOpen(open) {
       nav.classList.toggle("is-open", open);
@@ -44,6 +45,10 @@
       if (!needsCompact) {
         setOpen(false);
       }
+
+      if (typeof syncIndicator === "function") {
+        syncIndicator();
+      }
     }
 
     toggle.addEventListener("click", function () {
@@ -74,6 +79,137 @@
 
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(updateNavMode);
+    }
+
+    const sectionLinks = Array.prototype.slice
+      .call(links)
+      .map(function (link) {
+        const id = link.getAttribute("href");
+        if (!id || id.charAt(0) !== "#") {
+          return null;
+        }
+        const section = document.getElementById(id.slice(1));
+        if (!section) {
+          return null;
+        }
+        return { link: link, section: section };
+      })
+      .filter(Boolean);
+
+    if (sectionLinks.length) {
+      let activeId = null;
+      const indicator = document.createElement("span");
+      indicator.className = "nav-indicator";
+      indicator.setAttribute("aria-hidden", "true");
+      menu.appendChild(indicator);
+
+      function moveIndicator(link, immediate) {
+        if (!link || nav.classList.contains("nav--compact")) {
+          indicator.classList.remove("is-visible");
+          return;
+        }
+
+        const menuRect = menu.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+        const left = linkRect.left - menuRect.left + menu.scrollLeft;
+        const width = linkRect.width;
+
+        if (immediate) {
+          indicator.style.transition = "none";
+        }
+
+        indicator.style.width = width + "px";
+        indicator.style.transform = "translateX(" + left + "px)";
+        indicator.classList.add("is-visible");
+
+        if (immediate) {
+          void indicator.offsetWidth;
+          indicator.style.transition = "";
+        }
+      }
+
+      function setActive(id, immediate) {
+        if (activeId === id && !immediate) {
+          return;
+        }
+        activeId = id;
+        let activeLink = null;
+        sectionLinks.forEach(function (item) {
+          const isActive = item.section.id === id;
+          item.link.classList.toggle("is-active", isActive);
+          if (isActive) {
+            item.link.setAttribute("aria-current", "true");
+            activeLink = item.link;
+          } else {
+            item.link.removeAttribute("aria-current");
+          }
+        });
+        moveIndicator(activeLink, immediate);
+      }
+
+      const visibleIds = new Set();
+
+      function updateActiveFromVisible() {
+        if (!visibleIds.size) {
+          return;
+        }
+
+        let nextId = null;
+        let bestDistance = Infinity;
+        const marker = window.innerHeight * 0.3;
+
+        sectionLinks.forEach(function (item) {
+          if (!visibleIds.has(item.section.id)) {
+            return;
+          }
+          const top = item.section.getBoundingClientRect().top;
+          const distance = Math.abs(top - marker);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            nextId = item.section.id;
+          }
+        });
+
+        if (nextId) {
+          setActive(nextId);
+        }
+      }
+
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              visibleIds.add(entry.target.id);
+            } else {
+              visibleIds.delete(entry.target.id);
+            }
+          });
+          updateActiveFromVisible();
+        },
+        {
+          rootMargin: "-25% 0px -45% 0px",
+          threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+        }
+      );
+
+      sectionLinks.forEach(function (item) {
+        observer.observe(item.section);
+      });
+
+      syncIndicator = function () {
+        if (!activeId) {
+          return;
+        }
+        const active = sectionLinks.find(function (item) {
+          return item.section.id === activeId;
+        });
+        if (active) {
+          moveIndicator(active.link, true);
+        }
+      };
+
+      new ResizeObserver(syncIndicator).observe(menu);
+      window.addEventListener("load", syncIndicator);
     }
   })();
 

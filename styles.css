@@ -323,6 +323,7 @@ main .section + .section::before {
 }
 
 .nav-links {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -392,6 +393,7 @@ main .section + .section::before {
 }
 
 .nav-links a {
+  position: relative;
   font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: 0.08em;
@@ -399,12 +401,41 @@ main .section + .section::before {
   text-decoration: none;
   color: var(--color-muted);
   padding: 0.25rem 0;
-  transition: color 0.2s;
+  transition: color 0.35s ease;
+}
+
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--color-accent-secondary);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.35s ease,
+    width 0.35s ease,
+    opacity 0.2s ease;
+  will-change: transform, width;
+}
+
+.nav-indicator.is-visible {
+  opacity: 1;
+}
+
+.nav--compact .nav-indicator {
+  display: none;
 }
 
 .nav-links a:hover,
-.nav-links a:focus-visible {
+.nav-links a:focus-visible,
+.nav-links a.is-active {
   color: var(--color-accent-secondary);
+}
+
+.nav--compact .nav-links a.is-active {
+  box-shadow: inset 0 -2px 0 var(--color-accent-secondary);
 }
 
 /* ── Hero ── */
@@ -1057,6 +1088,7 @@ body:has(.rsvp-bar) {
 
   .btn,
   .nav-links a,
+  .nav-indicator,
   .nav-toggle-icon,
   .nav-toggle-icon::before,
   .nav-toggle-icon::after,
