@@ -4,10 +4,10 @@
   label: Story
 - id: venue
   label: Venue
-- id: travel
-  label: Travel
 - id: accommodation
   label: Accommodation
+- id: travel
+  label: Travel
 - id: catering
   label: Catering
 - id: entertainment
