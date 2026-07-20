@@ -519,14 +519,6 @@ main .section + .section::before {
   }
 }
 
-.hero-rsvp {
-  margin-top: 0.5rem;
-}
-
-.hero .rsvp-deadline {
-  margin-bottom: 1rem;
-}
-
 /* ── Buttons ── */
 .btn {
   display: inline-block;
@@ -901,15 +893,63 @@ main .section + .section::before {
   font-weight: 400;
 }
 
-/* ── RSVP ── */
-.rsvp {
-  text-align: center;
+.timeline-more {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: var(--color-muted);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.rsvp-deadline {
+.timeline-more::before {
+  content: "(";
+}
+
+.timeline-more::after {
+  content: ")";
+}
+
+.timeline-more:hover,
+.timeline-more:focus-visible {
+  color: var(--color-accent-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── RSVP bar ── */
+.rsvp-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(253, 249, 248, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.rsvp-bar-deadline {
+  margin: 0;
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.rsvp-bar-btn {
+  padding: 0.625rem 1.5rem;
+}
+
+body:has(.rsvp-bar) {
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 /* ── Landing page ── */

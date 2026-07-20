@@ -1,0 +1,5 @@
+{% assign rsvp = site.rsvp[page.invitation] %}
+<div class="rsvp-bar" role="region" aria-label="RSVP">
+  <p class="rsvp-bar-deadline">Please respond by <strong>{{ rsvp.deadline }}</strong></p>
+  <a class="btn btn-dark rsvp-bar-btn" href="{{ rsvp.url }}" target="_blank" rel="noopener noreferrer">RSVP</a>
+</div>
