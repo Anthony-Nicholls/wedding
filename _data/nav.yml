@@ -1,7 +1,5 @@
 - id: top
   label: Home
-- id: story
-  label: Story
 - id: venue
   label: Venue
 - id: accommodation
