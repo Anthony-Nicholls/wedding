@@ -271,6 +271,8 @@ main .section + .section::before {
 
 .nav--compact .nav-toggle {
   display: flex;
+  position: relative;
+  z-index: 2;
 }
 
 .nav-toggle:focus-visible {
@@ -337,22 +339,34 @@ main .section + .section::before {
 
 .nav--compact .nav-links {
   display: none;
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
+  z-index: 1;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem 1rem;
+  justify-content: center;
+  gap: 1rem;
+  padding: 5rem 1.5rem calc(5rem + env(safe-area-inset-bottom, 0px));
   background: rgba(253, 249, 248, 0.98);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: none;
+  overflow-y: auto;
 }
 
 .nav--compact.is-open .nav-links {
   display: flex;
+}
+
+.nav--compact.is-open {
+  z-index: 110;
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .nav.is-measuring {
