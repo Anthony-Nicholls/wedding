@@ -46,7 +46,7 @@
         setOpen(false);
       }
 
-      if (typeof syncIndicator === "function") {
+      if (syncIndicator) {
         syncIndicator();
       }
     }
@@ -211,6 +211,99 @@
       new ResizeObserver(syncIndicator).observe(menu);
       window.addEventListener("load", syncIndicator);
     }
+  })();
+
+  (function () {
+    const bar = document.querySelector(".rsvp-bar");
+    if (!bar) {
+      return;
+    }
+
+    const deadline = bar.querySelector(".rsvp-bar-deadline");
+    const button = bar.querySelector(".rsvp-bar-btn");
+    if (!deadline || !button) {
+      return;
+    }
+
+    let lastY = window.scrollY || 0;
+    let ticking = false;
+    let stacked = false;
+
+    function measureStacked() {
+      const deadlineRect = deadline.getBoundingClientRect();
+      const buttonRect = button.getBoundingClientRect();
+      return deadlineRect.height > 0 && deadlineRect.bottom <= buttonRect.top + 1;
+    }
+
+    function setStacked(value) {
+      stacked = Boolean(value);
+      bar.classList.toggle("is-stacked", stacked);
+      if (!stacked) {
+        bar.classList.remove("is-minimal");
+      }
+    }
+
+    function updateStacked() {
+      if (bar.classList.contains("is-minimal")) {
+        return;
+      }
+      setStacked(measureStacked());
+    }
+
+    function refreshStacked() {
+      const wasMinimal = bar.classList.contains("is-minimal");
+      bar.classList.remove("is-minimal", "is-stacked");
+      void bar.offsetWidth;
+      setStacked(measureStacked());
+      if (wasMinimal && stacked) {
+        bar.classList.add("is-minimal");
+      }
+    }
+
+    function setMinimal(minimal) {
+      if (minimal && !stacked) {
+        return;
+      }
+      bar.classList.toggle("is-minimal", Boolean(minimal));
+    }
+
+    function updateFromScroll() {
+      ticking = false;
+      updateStacked();
+
+      if (!stacked) {
+        lastY = window.scrollY || 0;
+        return;
+      }
+
+      const y = window.scrollY || 0;
+      const delta = y - lastY;
+
+      if (y <= 8) {
+        setMinimal(false);
+      } else if (delta > 6) {
+        setMinimal(true);
+      } else if (delta < -6) {
+        setMinimal(false);
+      }
+
+      lastY = y;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateFromScroll);
+      }
+    }
+
+    refreshStacked();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () {
+      refreshStacked();
+      lastY = window.scrollY || 0;
+    });
+    window.addEventListener("load", refreshStacked);
   })();
 
   (function () {

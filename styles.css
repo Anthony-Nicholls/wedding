@@ -433,7 +433,6 @@ main .section + .section::before {
     transform 0.35s ease,
     width 0.35s ease,
     opacity 0.2s ease;
-  will-change: transform, width;
 }
 
 .nav-indicator.is-visible {
@@ -986,6 +985,10 @@ main .section + .section::before {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-top: 1px solid rgba(0, 0, 0, 0.06);
+  transition:
+    padding 0.3s ease,
+    background 0.3s ease,
+    gap 0.3s ease;
 }
 
 .rsvp-bar-deadline {
@@ -993,6 +996,13 @@ main .section + .section::before {
   font-family: var(--font-serif);
   font-size: 1rem;
   color: var(--color-text);
+  max-height: 3rem;
+  opacity: 1;
+  overflow: hidden;
+  transition:
+    opacity 0.3s ease,
+    max-height 0.3s ease,
+    margin 0.3s ease;
 }
 
 .rsvp-bar-btn {
@@ -1001,6 +1011,34 @@ main .section + .section::before {
 
 body:has(.rsvp-bar) {
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.rsvp-bar.is-stacked,
+.rsvp-bar.is-minimal {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.rsvp-bar.is-minimal {
+  gap: 0;
+  padding: 1.5rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(
+    to top,
+    rgba(253, 249, 248, 0.96) 35%,
+    rgba(253, 249, 248, 0.55) 70%,
+    rgba(253, 249, 248, 0)
+  );
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-top-width: 0;
+  border-top-color: transparent;
+}
+
+.rsvp-bar.is-minimal .rsvp-bar-deadline {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
 }
 
 /* ── Landing page ── */
@@ -1109,7 +1147,9 @@ body:has(.rsvp-bar) {
   .nav-toggle-icon::before,
   .nav-toggle-icon::after,
   .faq-item summary::after,
-  .landing-choice {
+  .landing-choice,
+  .rsvp-bar,
+  .rsvp-bar-deadline {
     transition: none;
   }
 }
