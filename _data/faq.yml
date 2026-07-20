@@ -1,0 +1,78 @@
+shared:
+  dress_code:
+    question: Is there a dress code?
+    answer: |
+      Smart casual or cocktail attire would be perfect.
+      Comfortable shoes are recommended as the venue has lawns and farm paths.
+
+  parking:
+    question: Is parking available?
+    answer: |
+      Yes, free parking is available on site, and guests are welcome to leave their cars overnight.
+      See the <a href="#travel">travel section</a> for the sat nav postcode, what3words locations, and public transport options.
+
+  disabled_access:
+    question: Is there disabled access?
+    answer: |
+      Cogges is a heritage site, so some areas are more accessible than others.
+      There is a dedicated disabled car park (see the <a href="#travel">travel section</a>), and accessible toilets are available on site.
+      The café and gift shop are wheelchair accessible, and the ground floor of the Manor House can be accessed with a narrow wheelchair.
+      For full details, see Cogges&rsquo;s
+      <a href="https://www.cogges.org.uk/accessibility" target="_blank" rel="noopener noreferrer">accessibility page</a>,
+      or send an email to
+      <a href="mailto:SITE_EMAIL">SITE_EMAIL</a>
+      if you have specific requirements and we will do our best to help.
+
+  accommodation:
+    question: Is there onsite accommodation?
+    answer: |
+      Cogges is a heritage site and does not have accommodation on site.
+      There are plenty of hotels and B&amp;Bs nearby. See the <a href="#accommodation">accommodation section</a> for suggestions.
+
+  dietary:
+    question: What about dietary requirements?
+    answer: |
+      Please let us know of any dietary requirements when you RSVP.
+      We also ask that any snacks brought to the venue do not contain nuts, due to a guest with a serious nut allergy.
+
+  rsvp:
+    question: When should I RSVP by?
+    type: rsvp
+
+  contact:
+    question: Still have a question?
+    type: contact
+
+day:
+  - question: What time should I arrive?
+    answer: |
+      Wedding guests are welcome to arrive from 12:00 pm, with the ceremony taking place between 1:00 pm and 1:30 pm.
+      Please see the <a href="#schedule">schedule</a> for the full timings of the day.
+  - shared: dress_code
+  - question: Can I bring children?
+    answer: |
+      Children are very welcome.
+      There is a playground and animals to see at Cogges, so there is plenty to keep younger guests entertained.
+  - shared: parking
+  - shared: disabled_access
+  - shared: accommodation
+  - question: Can we explore the farm on the day?
+    answer: |
+      Absolutely. The farm is open to the public from 9:30 am, and wedding guests can access it free of charge.
+      There is also time built into the schedule to explore the farm and gardens after the ceremony.
+  - shared: dietary
+  - shared: rsvp
+  - shared: contact
+
+evening:
+  - question: What time should I arrive?
+    answer: |
+      Evening guests are welcome to arrive from 6:00 pm.
+      Please see the <a href="#schedule">schedule</a> for the full timings of the evening.
+  - shared: dress_code
+  - shared: parking
+  - shared: disabled_access
+  - shared: accommodation
+  - shared: dietary
+  - shared: rsvp
+  - shared: contact

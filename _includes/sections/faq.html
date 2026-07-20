@@ -1,0 +1,35 @@
+<section class="section section-alt" id="faq">
+  <div class="container narrow">
+    <h2>FAQ</h2>
+    <div class="faq-list">
+      {% assign faq_items = site.data.faq[page.invitation] %}
+      {% for entry in faq_items %}
+      {% if entry.shared %}
+        {% assign shared_key = entry.shared %}
+        {% assign item = site.data.faq.shared[shared_key] %}
+      {% else %}
+        {% assign item = entry %}
+      {% endif %}
+      <details class="faq-item">
+        <summary>{{ item.question }}</summary>
+        <div class="faq-answer">
+          {% if item.type == "rsvp" %}
+          <p>
+            Please respond by <strong>{{ site.rsvp[page.invitation].deadline }}</strong>.
+            You can RSVP using the button at the bottom of the page.
+          </p>
+          {% elsif item.type == "contact" %}
+          <p>
+            Please send an email to
+            <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+            and we will do our best to help.
+          </p>
+          {% else %}
+          <p>{{ item.answer | replace: "SITE_EMAIL", site.email }}</p>
+          {% endif %}
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
