@@ -953,14 +953,6 @@ main .section + .section::before {
   white-space: nowrap;
 }
 
-.timeline-more::before {
-  content: "(";
-}
-
-.timeline-more::after {
-  content: ")";
-}
-
 .timeline-more:hover,
 .timeline-more:focus-visible {
   color: var(--color-accent-secondary);
