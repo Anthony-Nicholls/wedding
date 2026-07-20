@@ -13,6 +13,60 @@
       would really make our day.
       </i>
     </p>
-    <p><br>Details of how to contribute to our familymoon will be added here soon.</p>
+
+    {% if site.donations_api_url and site.donations_api_url != "" %}
+    <form
+      class="donation-form"
+      id="donation-form"
+      data-donations-api="{{ site.donations_api_url }}"
+      data-invitation="{{ page.invitation }}"
+      novalidate
+    >
+      <div class="donation-form-row">
+        <label for="donation-name">Name</label>
+        <input
+          id="donation-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          maxlength="80"
+          required
+        >
+      </div>
+      <div class="donation-form-row">
+        <label for="donation-message">Note to Anthony &amp; Cheryl</label>
+        <textarea
+          id="donation-message"
+          name="message"
+          rows="4"
+          maxlength="500"
+          placeholder="A little note for us…"
+          required
+        ></textarea>
+        <div class="emoji-bar" aria-label="Insert emoji">
+          <button type="button" class="emoji-btn" data-emoji="❤️">❤️</button>
+          <button type="button" class="emoji-btn" data-emoji="🎉">🎉</button>
+          <button type="button" class="emoji-btn" data-emoji="☀️">☀️</button>
+          <button type="button" class="emoji-btn" data-emoji="🥂">🥂</button>
+          <button type="button" class="emoji-btn" data-emoji="✈️">✈️</button>
+          <button type="button" class="emoji-btn" data-emoji="💕">💕</button>
+        </div>
+      </div>
+      <div class="donation-form-row">
+        <label for="donation-amount">Amount (£)</label>
+        <input
+          id="donation-amount"
+          name="amount"
+          type="number"
+          inputmode="decimal"
+          min="1"
+          step="1"
+          required
+        >
+      </div>
+      <p class="donation-form-status" id="donation-form-status" role="status" hidden></p>
+      <button class="btn btn-dark" type="submit" id="donation-submit">Donate</button>
+    </form>
+    {% endif %}
   </div>
 </section>

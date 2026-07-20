@@ -1,0 +1,13 @@
+{% if site.donations_api_url and site.donations_api_url != "" %}
+<section class="section" id="messages" hidden data-donations-api="{{ site.donations_api_url }}">
+  <div class="container narrow">
+    <h2 id="messages-title">Messages</h2>
+    <div class="donation-thanks" id="donation-thanks" hidden>
+      <p class="donation-thanks-title">Thank you</p>
+      <p class="donation-thanks-text">Your payment was received successfully.</p>
+      <p class="donation-thanks-text">Your contribution means the world to us.</p>
+    </div>
+    <ul class="donations-list" id="donations-list"></ul>
+  </div>
+</section>
+{% endif %}

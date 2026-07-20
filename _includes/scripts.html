@@ -121,4 +121,209 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
   })();
+
+  (function () {
+    const form = document.getElementById("donation-form");
+    const root = document.getElementById("messages");
+    const list = document.getElementById("donations-list");
+    const thanks = document.getElementById("donation-thanks");
+    const messagesTitle = document.getElementById("messages-title");
+    const status = document.getElementById("donation-form-status");
+    const submit = document.getElementById("donation-submit");
+    const messageField = document.getElementById("donation-message");
+
+    const apiUrl =
+      (form && form.dataset.donationsApi) ||
+      (root && root.dataset.donationsApi);
+    if (!apiUrl) {
+      return;
+    }
+
+    const donated = /[?&]donated=1(?:&|$)/.test(window.location.search);
+
+    if (donated && root) {
+      root.hidden = false;
+      if (messagesTitle) {
+        messagesTitle.hidden = true;
+      }
+      if (thanks) {
+        thanks.hidden = false;
+      }
+      window.setTimeout(function () {
+        root.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function setStatus(text, isError) {
+      if (!status) {
+        return;
+      }
+      if (!text) {
+        status.hidden = true;
+        status.textContent = "";
+        status.classList.remove("is-error");
+        return;
+      }
+      status.hidden = false;
+      status.textContent = text;
+      status.classList.toggle("is-error", Boolean(isError));
+    }
+
+    function renderDonations(donations) {
+      if (!root || !list) {
+        return;
+      }
+
+      const items = (donations || []).filter(function (donation) {
+        return donation && (donation.message || donation.from);
+      });
+
+      if (!items.length) {
+        list.innerHTML = "";
+        if (!donated) {
+          root.hidden = true;
+        }
+        return;
+      }
+
+      list.innerHTML = items
+        .map(function (donation) {
+          const parts = [];
+          if (donation.message) {
+            parts.push(
+              '<p class="donation-message">' +
+                escapeHtml(donation.message) +
+                "</p>"
+            );
+          }
+
+          if (donation.from) {
+            parts.push(
+              '<p class="donation-meta"><span class="donation-from">' +
+                escapeHtml(donation.from) +
+                "</span></p>"
+            );
+          }
+
+          return '<li class="donation">' + parts.join("") + "</li>";
+        })
+        .join("");
+
+      root.hidden = false;
+    }
+
+    fetch(apiUrl, { credentials: "omit" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Donations request failed");
+        }
+        return response.json();
+      })
+      .then(function (payload) {
+        renderDonations(payload.donations);
+      })
+      .catch(function () {
+        if (root && !donated) {
+          root.hidden = true;
+        }
+      });
+
+    if (!form) {
+      return;
+    }
+
+    form.querySelectorAll(".emoji-btn").forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (!messageField) {
+          return;
+        }
+        const emoji = button.getAttribute("data-emoji") || "";
+        const start = messageField.selectionStart;
+        const end = messageField.selectionEnd;
+        const value = messageField.value;
+        messageField.value =
+          value.slice(0, start) + emoji + value.slice(end);
+        const cursor = start + emoji.length;
+        messageField.focus();
+        messageField.setSelectionRange(cursor, cursor);
+      });
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      setStatus("");
+
+      const amount = Number(form.amount.value);
+      const name = String(form.name.value || "").trim();
+      const message = String(form.message.value || "").trim();
+
+      if (!name) {
+        setStatus("Please enter your name.", true);
+        form.name.focus();
+        return;
+      }
+      if (!message) {
+        setStatus("Please enter a note.", true);
+        form.message.focus();
+        return;
+      }
+      if (!Number.isFinite(amount) || amount < 1) {
+        setStatus("Please enter an amount of at least £1.", true);
+        form.amount.focus();
+        return;
+      }
+
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = "Redirecting…";
+      }
+
+      fetch(apiUrl.replace(/\/$/, "") + "/donate", {
+        method: "POST",
+        credentials: "omit",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: amount,
+          name: name,
+          message: message,
+          invitation: form.dataset.invitation || "day",
+        }),
+      })
+        .then(function (response) {
+          return response.json().then(function (payload) {
+            return { ok: response.ok, payload: payload };
+          });
+        })
+        .then(function (result) {
+          if (!result.ok || !result.payload.url) {
+            throw new Error(
+              (result.payload && result.payload.error) ||
+                "Could not start donation."
+            );
+          }
+          window.location.href = result.payload.url;
+        })
+        .catch(function (error) {
+          setStatus(
+            error && error.message
+              ? error.message
+              : "Something went wrong. Please try again.",
+            true
+          );
+          if (submit) {
+            submit.disabled = false;
+            submit.textContent = "Donate";
+          }
+        });
+    });
+  })();
 </script>

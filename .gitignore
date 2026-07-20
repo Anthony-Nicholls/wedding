@@ -23,3 +23,7 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 vendor/bundle/
+
+# Worker
+workers/donations/node_modules/
+workers/donations/.wrangler/

@@ -567,6 +567,174 @@ main .section + .section::before {
   text-underline-offset: 3px;
 }
 
+/* ── Gifts / donations ── */
+.donation-form {
+  margin: 2rem auto 0;
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.donation-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+
+.donation-form label {
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.donation-form input,
+.donation-form textarea {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid rgba(61, 54, 54, 0.18);
+  border-radius: 2px;
+  background: var(--color-white);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.donation-form input:focus,
+.donation-form textarea:focus {
+  outline: 2px solid var(--color-accent-secondary);
+  outline-offset: 1px;
+}
+
+.donation-form textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.emoji-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.emoji-btn {
+  appearance: none;
+  border: 1px solid rgba(61, 54, 54, 0.12);
+  background: var(--color-bg-alt);
+  border-radius: 2px;
+  padding: 0.35rem 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.emoji-btn:hover,
+.emoji-btn:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-white);
+}
+
+.donation-form .btn {
+  align-self: center;
+  margin-top: 0.25rem;
+}
+
+.donation-form-status {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+}
+
+.donation-form-status.is-error {
+  color: #8a4a4a;
+}
+
+.donation-thanks {
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.donation-thanks-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(2.82rem, 8.1vw, 3.9rem);
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.donation-thanks-text {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  color: var(--color-muted);
+}
+
+.donation-thanks-text + .donation-thanks-text {
+  margin-top: 0.35rem;
+}
+
+.donations-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.donation {
+  position: relative;
+  text-align: center;
+  padding-block: 1.75rem;
+}
+
+.donation:first-child {
+  padding-top: 0;
+}
+
+.donation:last-child {
+  padding-bottom: 0;
+}
+
+.donation + .donation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(12rem, 70%);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent) 25%,
+    var(--color-accent-secondary) 50%,
+    var(--color-accent) 75%,
+    transparent
+  );
+  opacity: 0.45;
+}
+
+.donation-message {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  font-style: italic;
+  margin: 0 0 0.5rem;
+}
+
+.donation-meta {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
 /* ── Cards ── */
 .cards {
   display: grid;

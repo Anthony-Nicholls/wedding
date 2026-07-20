@@ -14,8 +14,10 @@ rsvp:
     deadline: 1st March 2027
     url: https://forms.gle/mLFNgaRh1h63CqHb9
 email: hello@nichollswedding.co.uk
+donations_api_url: "https://wedding-donations.7bcv5frn95.workers.dev"
 
 exclude:
   - Gemfile
   - README.md
   - vendor
+  - workers
