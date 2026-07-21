@@ -1,0 +1,57 @@
+intro: |
+  Cogges Manor Farm is on Church Lane in Witney, a short walk from the town centre.
+  Free parking is available on site, and guests are welcome to leave their cars overnight.
+
+car:
+  summary: Follow the brown Cogges signs (with a cart symbol) to the Cogges Hill Road car park. There is a short, signposted walk from the car park to the entrance.
+  tip: Please do not drive down Church Lane for general parking — it is not a through road and has no public spaces.
+  postcode: OX28 3FR
+  google_maps_url: https://www.google.com/maps?ll=51.784246,-1.475788&z=15&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8238071467645593535
+  apple_maps_url: https://maps.apple.com/?q=Cogges+Manor+Farm,+Church+Lane,+Witney
+  locations:
+    - label: Sat nav
+      value: OX28 3FR
+      url: https://www.google.com/maps/place/OX28+3FR
+    - label: Main car park
+      value: ///cool.dark.custom
+      url: https://w3w.co/cool.dark.custom
+    - label: Disabled car park
+      value: ///nest.trend.hiking
+      url: https://w3w.co/nest.trend.hiking
+
+stations:
+  - name: Hanborough
+    meta: 6 miles away
+    options:
+      - label: Taxi
+        detail: 13 minutes
+      - label: Bus
+        detail: 30 minutes - Catch the S7 to Witney, Market Square
+
+  - name: Oxford
+    meta: 12 miles away
+    options:
+      - label: Taxi
+        detail: 30 minutes
+      - label: Bus
+        detail: 55 minutes - Catch the S1 to Witney, opp King George’s Field
+
+taxis:
+  summary: |
+    Local taxis get busy on Saturday evenings, so please pre-book if you need a ride back to a hotel or station after the reception.
+  firms:
+    - name: Charlbury Taxis
+      phone: "07855 806 102"
+      url: https://charlburytaxis.com/
+    - name: Excelsior Taxis
+      phone: "01608 643 721"
+      url: https://www.excelsiortaxis.co.uk/
+    - name: Go Green Taxis
+      phone: "01993 845 845"
+      url: https://taxiwitney.co.uk/
+    - name: Ringo’s Taxis
+      phone: "01993 779 279"
+      url: https://ringostaxis.co.uk/
+
+map_embed_url: https://maps.google.com/maps?q=Cogges+Manor+Farm,+Church+Lane,+Witney+OX28+3FR&z=15&output=embed
+map_link_url: https://www.google.com/maps/place/Cogges+Manor+Farm/@51.7833,-1.4755,15z
