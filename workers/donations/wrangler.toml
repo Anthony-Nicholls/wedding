@@ -8,6 +8,6 @@ id = "f2c5a3d03bfe4b88bb71dca03293d574"
 
 [vars]
 # Payment Links (day / evening) — each should redirect back to the matching page after payment.
-DONATION_URL_DAY = "https://donate.stripe.com/bJe3cu5iF2d69t7bx0afS00"
+DONATION_URL_DAY = "https://donate.stripe.com/dRm4gyeTf4lefRv0SmafS02"
 DONATION_URL_EVENING = "https://donate.stripe.com/6oU8wOdPbeZScFj44yafS01"
 ALLOWED_ORIGINS = "https://nichollswedding.co.uk,https://www.nichollswedding.co.uk,http://127.0.0.1:4000,http://localhost:4000"
