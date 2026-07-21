@@ -6,6 +6,10 @@ compatibility_date = "2026-07-01"
 binding = "DONATIONS"
 id = "f2c5a3d03bfe4b88bb71dca03293d574"
 
+# Daily backup at 03:00 UTC
+[triggers]
+crons = ["0 3 * * *"]
+
 [vars]
 # Payment Links (day / evening) — each should redirect back to the matching page after payment.
 DONATION_URL_DAY = "https://donate.stripe.com/dRm4gyeTf4lefRv0SmafS02"

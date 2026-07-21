@@ -2,10 +2,13 @@
  * Donations API — stores messages in KV, redirects guests to a Stripe Payment Link.
  * GET  /        — list public donations
  * POST /donate  — save name/message/amount, return Payment Link URL with amount prefilled
+ * Cron         — daily backup of the donations list into dated KV keys
  */
 
 const LIST_KEY = "donations";
+const BACKUP_PREFIX = "donations-backup-";
 const MAX_DONATIONS = 500;
+const MAX_BACKUPS = 30;
 const MIN_AMOUNT_PENCE = 100; // £1
 const MAX_AMOUNT_PENCE = 1000000; // £10,000
 
@@ -43,6 +46,10 @@ export default {
         )
       );
     }
+  },
+
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(backupDonations(env));
   },
 };
 
@@ -121,6 +128,28 @@ async function handleDonate(request, env) {
   payUrl.searchParams.set("__prefilled_amount", String(amountPence));
 
   return json({ url: payUrl.toString() }, 200, { "Cache-Control": "no-store" });
+}
+
+async function backupDonations(env) {
+  if (!env.DONATIONS) {
+    return;
+  }
+
+  const raw = await env.DONATIONS.get(LIST_KEY);
+  const payload = raw == null ? "[]" : raw;
+  const stamp = new Date().toISOString().slice(0, 10); // YYYY-MM-DD (UTC)
+  const backupKey = `${BACKUP_PREFIX}${stamp}`;
+
+  await env.DONATIONS.put(backupKey, payload);
+
+  const listed = await env.DONATIONS.list({ prefix: BACKUP_PREFIX });
+  const backupKeys = listed.keys
+    .map((entry) => entry.name)
+    .sort()
+    .reverse();
+
+  const stale = backupKeys.slice(MAX_BACKUPS);
+  await Promise.all(stale.map((key) => env.DONATIONS.delete(key)));
 }
 
 function parseAmountPence(amount) {
