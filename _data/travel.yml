@@ -4,14 +4,14 @@ intro: |
 
 car:
   summary: Follow the brown Cogges signs (with a cart symbol) to the Cogges Hill Road car park. There is a short, signposted walk from the car park to the entrance.
-  tip: Please do not drive down Church Lane for general parking — it is not a through road and has no public spaces.
+  tip: Please only use Church Lane if you need the disabled car park. It is not a through road and has no general public parking.
   postcode: OX28 3FR
   google_maps_url: https://www.google.com/maps?ll=51.784246,-1.475788&z=15&t=m&hl=en-GB&gl=US&mapclient=embed&cid=8238071467645593535
   apple_maps_url: https://maps.apple.com/?q=Cogges+Manor+Farm,+Church+Lane,+Witney
   locations:
     - label: Sat nav
       value: OX28 3FR
-      url: https://www.google.com/maps/place/OX28+3FR
+      url: https://www.google.com/maps/place/Cogges+Manor+Farm+-+Main+Car+Park/@51.7825085,-1.4758564,589m/data=!3m1!1e3!4m15!1m8!3m7!1s0x4876cc43af173a27:0xb7c7ae1afcd4605e!2sWitney+OX28+3FR!3b1!8m2!3d51.7829103!4d-1.4752073!16s%2Fg%2F1v2kwyhd!3m5!1s0x4876cc4306c1638d:0x152e324c9862f377!8m2!3d51.7827085!4d-1.4759574!16s%2Fg%2F1hc37hv25?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D
     - label: Main car park
       value: ///cool.dark.custom
       url: https://w3w.co/cool.dark.custom
@@ -24,34 +24,34 @@ stations:
     meta: 6 miles away
     options:
       - label: Taxi
-        detail: 13 minutes
+        detail: 12 minutes
       - label: Bus
-        detail: 30 minutes - Catch the S7 to Witney, Market Square
+        detail: 25 minutes - Catch the S7 to Witney, Market Square
 
   - name: Oxford
     meta: 12 miles away
     options:
       - label: Taxi
-        detail: 30 minutes
+        detail: 28 minutes
       - label: Bus
-        detail: 55 minutes - Catch the S1 to Witney, opp King George’s Field
+        detail: 46 minutes - Catch the S1 to Witney, Cogges Hill Road
 
 taxis:
   summary: |
     Local taxis get busy on Saturday evenings, so please pre-book if you need a ride back to a hotel or station after the reception.
   firms:
-    - name: Charlbury Taxis
-      phone: "07855 806 102"
-      url: https://charlburytaxis.com/
-    - name: Excelsior Taxis
-      phone: "01608 643 721"
-      url: https://www.excelsiortaxis.co.uk/
     - name: Go Green Taxis
       phone: "01993 845 845"
       url: https://taxiwitney.co.uk/
     - name: Ringo’s Taxis
       phone: "01993 779 279"
       url: https://ringostaxis.co.uk/
+    - name: Charlbury Taxis
+      phone: "07855 806 102"
+      url: https://charlburytaxis.com/
+    - name: Excelsior Taxis
+      phone: "01608 643 721"
+      url: https://www.excelsiortaxis.co.uk/
 
 map_embed_url: https://maps.google.com/maps?q=Cogges+Manor+Farm,+Church+Lane,+Witney+OX28+3FR&z=15&output=embed
 map_link_url: https://www.google.com/maps/place/Cogges+Manor+Farm/@51.7833,-1.4755,15z
